@@ -12,7 +12,7 @@ pip3 install requests && pip3 install beautifulsoup4
 
 ## Usage
 ### Acceptable input example
-The input is not case sensitive.
+The input is not case-sensitive.
 1. COMP
 2. comp1021
 3. COMP 1021
