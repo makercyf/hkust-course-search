@@ -7,7 +7,7 @@ Searching the information of HKUST courses
 
 You can install the packages via PyPI  
 ```sh
-user@ubuntu:~$ pip3 install requests && pip3 install beautifulsoup4
+pip3 install requests && pip3 install beautifulsoup4
 ```
 
 ## Usage
