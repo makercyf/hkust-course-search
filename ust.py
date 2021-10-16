@@ -24,8 +24,8 @@ def get_year_and_subject_code_list():
     return year, all_subject_code
 
 
-def course_search(course, keyword, type):
-    if keyword.upper() in str(course).split(f'<div class="crse-{type}">')[1].split('</div>')[0].upper():
+def course_search(course, keyword, category):
+    if keyword.upper() in str(course).split(f'<div class="crse-{category}">')[1].split('</div>')[0].upper():
         code = str(course).split('<div class="crse-code">')[1].split('</div>')[0]
         Msg.append(f"Course code: {code}")
         title = str(course).split('<div class="crse-title">')[1].split('</div>')[0]
@@ -40,6 +40,7 @@ def course_search(course, keyword, type):
             Msg.append(f'{header}: {data}')
             i = i + 1
         Msg.append(f'Description: {course.find_all("div", class_="data")[-1].string}\n')
+
 
 
 def send_msg(keyword):
@@ -80,6 +81,10 @@ def main(keyword):
                 website = get_source(f"https://prog-crs.ust.hk/ugcourse/{academic_year}/{keyword[0:4]}")
                 for course in website.find_all("li", class_="crse"):
                     course_search(course, keywordSplit[1], "title")
+                    for content in course.find_all("div", class_="data"):
+                        if keywordSplit[1] in str(content).upper():
+                            code = str(content.find_parents("li")).split('<div class="crse-code">')[1].split('</div>')[0]
+                            course_search(course, code.split()[1], "code")
                 send_msg(keyword)
         else:
             # Case: computer (universal search while first four words fall in the list)
@@ -87,6 +92,10 @@ def main(keyword):
                 website = get_source(f"https://prog-crs.ust.hk/ugcourse/{academic_year}/{subject}")
                 for course in website.find_all("li", class_="crse"):
                     course_search(course, keyword, "title")
+                    for content in course.find_all("div", class_="data"):
+                        if keyword.upper() in str(content).upper():
+                            code = str(content.find_parents("li")).split('<div class="crse-code">')[1].split('</div>')[0]
+                            course_search(course, code.split()[1], "code")
             send_msg(keyword)
     # Universal search
     elif keyword[0:4].isnumeric() and len(keyword) <= 5:
@@ -102,6 +111,10 @@ def main(keyword):
             website = get_source(f"https://prog-crs.ust.hk/ugcourse/{academic_year}/{subject}")
             for course in website.find_all("li", class_="crse"):
                 course_search(course, keyword, "title")
+                for content in course.find_all("div", class_="data"):
+                    if keyword.upper() in str(content).upper():
+                        code = str(content.find_parents("li")).split('<div class="crse-code">')[1].split('</div>')[0]
+                        course_search(course, code.split()[1], "code")
         send_msg(keyword)
 
 
