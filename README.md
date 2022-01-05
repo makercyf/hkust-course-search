@@ -1,5 +1,5 @@
 # hkust-course-search
-Searching the information of HKUST courses
+Searching the latest information of HKUST courses
 
 ## Requirements
 1. [Requests](https://github.com/psf/requests)
@@ -162,3 +162,14 @@ Description: An introduction to the fundamental principles of international fina
 
 user@ubuntu:~$
 ```
+
+## Application
+### Host your own Telegram search bot
+This telegram bot relies on the library [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot) and Telegram Bot API.
+
+You can install the package via PyPI  
+```sh
+pip3 install python-telegram-bot
+```
+
+You may follow the online tutorials to get your own bot Token, and then enter your own token inside the double quote of `ustBot.py` line 8
