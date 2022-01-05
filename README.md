@@ -173,3 +173,8 @@ pip3 install python-telegram-bot
 ```
 
 You may follow the online tutorials to get your own bot Token, and then enter your own token inside the double quote of `ustBot.py` line 8
+
+After that, you may start the telegram bot by entering
+```sh
+python3 ustBot.py
+```
