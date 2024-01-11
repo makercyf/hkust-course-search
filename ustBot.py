@@ -106,7 +106,7 @@ def main(update, context):
     text_input = text
     text = text.upper()
     if text == "debug":
-        sendMsg("[DEBUG] Working")
+        sendMsg(userID, "[DEBUG] Working")
     elif text[0] == "/":
         command(text)
     # Subject limited search
